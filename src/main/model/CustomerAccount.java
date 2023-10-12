@@ -12,6 +12,7 @@ public class CustomerAccount {
     private ArrayList<Integer> paymentLog;
     private ArrayList<CustomerAccount> customerList;
     private final int totalInventory = 50;
+    private final int maxDuration = 30;
 
     public CustomerAccount(String name, int deposit) {
         this.balance = deposit;
@@ -27,7 +28,7 @@ public class CustomerAccount {
         this.paymentLog.add(amount);
     }
 
-    
+
     public void withdraw(int amount) {
         this.balance = this.balance - amount;
         this.paymentLog.add(-amount);

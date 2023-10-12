@@ -9,17 +9,17 @@ public class Item {
     private static int nextItemId = 1;
 
 
-    public void Item(int itemId, int period, int rent){
+    public Item(int itemId, int period, int rent) {
         this.period = period;
         this.itemId = nextItemId++;
     }
 
-    public int getItemId(){
+    public int getItemId() {
         return this.itemId;
     }
 
-    public int rentCalculatorPerItem(){
-        return ((this.period)*(this.rent));
+    public int rentCalculatorPerItem() {
+        return ((this.period) * (this.rent));
     }
 
 }
