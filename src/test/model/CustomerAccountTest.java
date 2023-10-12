@@ -20,12 +20,12 @@ class CustomerAccountTest {
     }
 
     @Test
-    void testConstructor(){
+    void testConstructor() {
         assertEquals(500, testCustomerAccount.getBalance());
 //        assertEquals(1, testCustomerAccount.getId());
         ArrayList<Integer> tstPaymentLog = testCustomerAccount.getPaymentLog();
-        assertEquals(1 , tstPaymentLog.size());
-        assertEquals(500 , tstPaymentLog.get(0));
+        assertEquals(1, tstPaymentLog.size());
+        assertEquals(500, tstPaymentLog.get(0));
         ArrayList<Item> tstItemList = testCustomerAccount.getItemlist();
         assertEquals(0, tstItemList.size());
     }
@@ -75,6 +75,30 @@ class CustomerAccountTest {
         ArrayList<Item> testList1 = testCustomerAccount.getItemlist();
         assertEquals(1, testList1.size());
         assertEquals("Snowboard", testList1.get(0).getName());
+    }
+
+    @Test
+    void testTotalItemsRented() {
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.addItem(testItem2);
+        assertEquals(2, testCustomerAccount.totalItemsRented());
+    }
+
+
+    @Test
+    void testTotalStockPresentInStore() {
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.addItem(testItem2);
+        assertEquals(48, testCustomerAccount.totalStockPresentInStore());
+    }
+
+    @Test
+    void testFindItemFromThisAccount() {
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.addItem(testItem2);
+        testCustomerAccount.addItem(testItem1);
+        assertEquals(2, testCustomerAccount.findItemFromThisAccount(1).size());
+        assertEquals(1, testCustomerAccount.findItemFromThisAccount(2).size());
     }
 
 

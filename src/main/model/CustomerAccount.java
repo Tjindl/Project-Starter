@@ -10,7 +10,7 @@ public class CustomerAccount {
     private int balance;
     private static int nextAccountId = 1;
     private ArrayList<Integer> paymentLog;
-    private ArrayList<CustomerAccount> customerList;
+    private ArrayList<Item> allRentedList = new ArrayList<>();
     private final int totalInventory = 50;
     private final int maxDuration = 30;
 
@@ -18,6 +18,7 @@ public class CustomerAccount {
         this.balance = deposit;
         this.id = nextAccountId++;
         this.itemlist = new ArrayList<Item>();
+
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
     }
@@ -25,6 +26,7 @@ public class CustomerAccount {
     public void deposit(int amount) {
         this.balance = this.balance + amount;
         this.paymentLog.add(amount);
+
     }
 
 
@@ -55,26 +57,24 @@ public class CustomerAccount {
 
     public void addItem(Item i) {
         this.itemlist.add(i);
+        allRentedList.add(i);
     }
 
     public void removeItem(Item i) {
         for (Item i1 : itemlist) {
             if (i1.getItemId() == i.getItemId()) {
                 this.itemlist.remove(i1);
+                allRentedList.remove(i1);
                 break;
             }
         }
     }
 
     public int totalItemsRented() {
-        int rsf = 0;
-        for (CustomerAccount cacc : this.customerList) {
-            rsf = cacc.itemlist.size() + rsf;
-        }
-        return rsf;
+        return allRentedList.size();
     }
 
-    
+
 
     public int totalStockPresentInStore() {
         return (totalInventory - this.totalItemsRented());
