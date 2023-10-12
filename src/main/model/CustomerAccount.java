@@ -74,6 +74,8 @@ public class CustomerAccount {
         return rsf;
     }
 
+    
+
     public int totalStockPresentInStore() {
         return (totalInventory - this.totalItemsRented());
     }
