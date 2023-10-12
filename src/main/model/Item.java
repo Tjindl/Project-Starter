@@ -7,11 +7,14 @@ public class Item {
     private int rent;
     private int itemId;
     private static int nextItemId = 1;
+    private String name;
 
 
-    public Item(int itemId, int period, int rent) {
+    public Item(String name, int itemId, int period, int rent) {
         this.period = period;
         this.itemId = nextItemId++;
+        this.rent = rent;
+        this.name = name;
     }
 
     public int getItemId() {
@@ -22,4 +25,7 @@ public class Item {
         return ((this.period) * (this.rent));
     }
 
+    public String getName() {
+        return this.name;
+    }
 }

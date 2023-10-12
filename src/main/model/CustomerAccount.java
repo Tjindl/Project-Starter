@@ -20,7 +20,6 @@ public class CustomerAccount {
         this.itemlist = new ArrayList<Item>();
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
-        this.customerList = new ArrayList<>();
     }
 
     public void deposit(int amount) {
@@ -46,7 +45,7 @@ public class CustomerAccount {
         return this.itemlist;
     }
 
-    public int getRent() {
+    public int calculateRent() {
         int totalsofar = 0;
         for (Item i : itemlist) {
             totalsofar = i.rentCalculatorPerItem() + totalsofar;
@@ -87,6 +86,10 @@ public class CustomerAccount {
             }
         }
         return lst;
+    }
+
+    public ArrayList<Integer> getPaymentLog() {
+        return this.paymentLog;
     }
 
 }
