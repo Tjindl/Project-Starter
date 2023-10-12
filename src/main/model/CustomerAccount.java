@@ -27,6 +27,7 @@ public class CustomerAccount {
         this.paymentLog.add(amount);
     }
 
+    
     public void withdraw(int amount) {
         this.balance = this.balance - amount;
         this.paymentLog.add(-amount);
