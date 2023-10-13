@@ -5,10 +5,11 @@ import model.Item;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class CustomerApp {
-    private CustomerAccount Ca1;
-    private ArrayList<CustomerAccount> CustomerAccountList = new ArrayList<>();
+    private CustomerAccount ca1;
+    private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
     private Scanner input;
 
 
@@ -53,7 +54,7 @@ public class CustomerApp {
 //        } else if (command.equals("r")) {
 //            doReturn();
         } else if (command.equals("ts")) {
-            doAvailabeStock();
+            doAvailableStock();
         } else if (command.equals("rs")) {
             doRentedStock();
         } else if (command.equals("li")) {
@@ -73,34 +74,40 @@ public class CustomerApp {
     private void doDeposit() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
                 System.out.print("Enter amount to deposit: $");
                 int amt = input.nextInt();
                 ca.deposit(amt);
-                int bal = ca.getBalance();
-                System.out.printf("Your total balance is: \n", bal);
+                System.out.print("Balance: ");
+                System.out.println(Integer.toString(ca.getBalance()));
+//
             } else {
-            System.out.println("Cannot find your account, please make one\n");
+                System.out.println("Cannot find your account, please make one\n");
+            }
         }
+    }
 
-    }}
+
+
 
     private void doCalculate() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
-                System.out.printf("Your total balance is: ", ca.calculateRent());
+                System.out.print("Your total rent is: ");
+                System.out.println(Integer.toString(ca.calculateRent()));
             }
+            System.out.println("Cannot find your account, please make one\n");
         }
-        System.out.println("Cannot find your account, please make one\n");
+
     }
 
     private void doBorrow() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
                 System.out.print("enter 1 for Ski or 2 for Snowboard?");
                 int i = input.nextInt();
@@ -113,8 +120,8 @@ public class CustomerApp {
                 } else {
                     System.out.println("Selection not valid...");
                 }
-
-        } else {  System.out.println("Cannot find your account, please make one\n");
+            } else {
+                System.out.println("Cannot find your account, please make one\n");
             }
         }
     }
@@ -122,7 +129,7 @@ public class CustomerApp {
 //    private void doReturn() {
 //        System.out.print("Enter account id : ");
 //        int amount = input.nextInt();
-//        for (CustomerAccount ca: CustomerAccountList) {
+//        for (CustomerAccount ca: customerAccounts) {
 //            if (ca.getId() == amount) {
 //                System.out.print("Ski or Snowboard?");
 //                String str = input.next();
@@ -138,26 +145,30 @@ public class CustomerApp {
 //        }
 //    }
 
-    private void doAvailabeStock() {
-        int i = Ca1.totalStockPresentInStore();
-        System.out.printf("Available stock: ", Integer.toString(i));
+    private void doAvailableStock() {
+        int i = ca1.totalStockPresentInStore();
+        System.out.print("Available stock: ");
+        System.out.println(Integer.toString(i));
     }
 
     private void doRentedStock() {
-        System.out.printf("rented stock: ",Ca1.totalItemsRented());
+        System.out.print("rented stock: ");
+        System.out.println(Integer.toString(ca1.totalItemsRented()));
     }
 
     private void doListItem() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
                 System.out.print("Enter item id : ");
                 int amt = input.nextInt();
                 if (amt == 1) {
-                    System.out.printf("required list: ",Ca1.findItemFromThisAccount(1));
+                    System.out.print("required list: ");
+                    System.out.println(Arrays.toString((ca1.findItemFromThisAccount(1)).toArray()));
                 } else if (amt == 2) {
-                    System.out.printf("required list: ",Ca1.findItemFromThisAccount(2));
+                    System.out.print("required list: ");
+                    System.out.println(Arrays.toString((ca1.findItemFromThisAccount(2)).toArray()));
                 } else {
                     System.out.println("Selection not valid...");
                 }
@@ -169,14 +180,16 @@ public class CustomerApp {
     private void doRemainingTime() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
                 System.out.print("Enter item id : ");
                 int amt = input.nextInt();
                 if (amt == 1) {
-                    System.out.printf("required list: ",Ca1.remainingLendingTime(1));
+                    System.out.print("required list: ");
+                    System.out.println(Integer.toString(ca1.remainingLendingTime(1)));
                 } else if (amt == 2) {
-                    System.out.printf("required list: ",Ca1.remainingLendingTime(2));
+                    System.out.print("required list: ");
+                    System.out.println(Integer.toString(ca1.remainingLendingTime(2)));
                 } else {
                     System.out.println("Selection not valid...");
                 }
@@ -193,16 +206,18 @@ public class CustomerApp {
         System.out.print("Please enter your deposit ");
         int amt = input.nextInt();
         CustomerAccount nct = new CustomerAccount(str,amt);
-        System.out.printf("A new account has been added, Account id: ", nct.getId());
+        System.out.print("A new account has been added, Account id: ");
+        System.out.println(Integer.toString(nct.getId()));
     }
 
 
     private void doPaymentLog() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: CustomerAccountList) {
+        for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
-                System.out.printf("Log", ca.getPaymentLog());
+                System.out.print("Log");
+                System.out.println(Arrays.toString(ca.getPaymentLog().toArray()));
 
             }
         }
@@ -214,12 +229,13 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: initializes accounts
     private void init() {
-        Ca1 = new CustomerAccount("Tushar", 500);
-        Ca1.setId(2);
+        ca1 = new CustomerAccount("Tushar", 500);
+        ca1.setId(2);
+        ca1.addItem(new Item("Ski", 1, 2, 15));
 
         input = new Scanner(System.in);
         input.useDelimiter("\n");
-        CustomerAccountList.add(Ca1);
+        customerAccounts.add(ca1);
     }
 
 
@@ -227,10 +243,9 @@ public class CustomerApp {
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\td -> deposit");
-        System.out.println("\tw -> withdraw");
         System.out.println("\tcr -> Calculate rent");
         System.out.println("\tb -> borrow item");
-        System.out.println("\tr -> return item");
+//        System.out.println("\tr -> return item");
         System.out.println("\tts -> see available stock");
         System.out.println("\trs -> rented stock");
         System.out.println("\tli -> list of items rented");
