@@ -13,14 +13,20 @@ public class CustomerAccount {
     private final int totalInventory = 50;
     private final int maxDuration = 30;
 
+
+    // MODIFIES : this
+    // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
         this.balance = deposit;
-        this.id = nextAccountId++;
+        this.id = nextAccountId;
         this.itemlist = new ArrayList<Item>();
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
     }
 
+    // REQUIRES : amount >=0
+    // MODIFIES : this
+    // EFFECTS : Deposits the amount in tha balance and notes a log of the deposit
     public void deposit(int amount) {
         this.balance = this.balance + amount;
         this.paymentLog.add(amount);
@@ -28,6 +34,7 @@ public class CustomerAccount {
     }
 
 
+    // REQUIRES : amount <= balance
     public void deductRentFromFunds(int amount) {
         this.balance = this.balance - amount;
         this.paymentLog.add(-amount);

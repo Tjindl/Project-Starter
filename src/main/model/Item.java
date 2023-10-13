@@ -14,7 +14,7 @@ public class Item {
 
     public Item(String name, int itemId, int period, int rent) {
         this.period = period;
-        this.itemId = nextItemId++;
+        this.itemId = itemId;
         this.rent = rent;
         this.name = name;
     }

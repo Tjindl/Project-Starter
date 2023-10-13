@@ -22,12 +22,14 @@ class CustomerAccountTest {
     @Test
     void testConstructor() {
         assertEquals(500, testCustomerAccount.getBalance());
-//        assertEquals(1, testCustomerAccount.getId());
+        assertEquals(1, testCustomerAccount.getId());
         ArrayList<Integer> tstPaymentLog = testCustomerAccount.getPaymentLog();
         assertEquals(1, tstPaymentLog.size());
         assertEquals(500, tstPaymentLog.get(0));
         ArrayList<Item> tstItemList = testCustomerAccount.getItemlist();
         assertEquals(0, tstItemList.size());
+        testCustomerAccount.setId(5);
+        assertEquals(5, testCustomerAccount.getId());
     }
 
 
