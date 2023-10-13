@@ -41,9 +41,9 @@ class CustomerAccountTest {
 
     @Test
     void testWithdraw() {
-        testCustomerAccount.withdraw(100);
+        testCustomerAccount.deductRentFromFunds(100);
         assertEquals(400, testCustomerAccount.getBalance());
-        testCustomerAccount.withdraw(200);
+        testCustomerAccount.deductRentFromFunds(200);
         assertEquals(200, testCustomerAccount.getBalance());
     }
 

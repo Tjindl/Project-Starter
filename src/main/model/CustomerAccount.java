@@ -5,7 +5,6 @@ import java.util.List;
 
 public class CustomerAccount {
     private ArrayList<Item> itemlist;
-    private String custname;
     private int id;
     private int balance;
     private static int nextAccountId = 1;
@@ -18,7 +17,6 @@ public class CustomerAccount {
         this.balance = deposit;
         this.id = nextAccountId++;
         this.itemlist = new ArrayList<Item>();
-
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
     }
@@ -30,13 +28,16 @@ public class CustomerAccount {
     }
 
 
-    public void withdraw(int amount) {
+    public void deductRentFromFunds(int amount) {
         this.balance = this.balance - amount;
         this.paymentLog.add(-amount);
     }
 
     public int getId() {
         return this.id;
+    }
+    public int setId(int i) {
+        return this.id = i;
     }
 
     public int getBalance() {
@@ -61,10 +62,11 @@ public class CustomerAccount {
     }
 
     public void removeItem(Item i) {
-        for (Item i1 : itemlist) {
+        for (Item i1 : this.itemlist) {
             if (i1.getItemId() == i.getItemId()) {
                 this.itemlist.remove(i1);
                 allRentedList.remove(i1);
+                this.balance = this.balance - i1.rentCalculatorPerItem();
                 break;
             }
         }
