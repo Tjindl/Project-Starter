@@ -101,5 +101,13 @@ class CustomerAccountTest {
         assertEquals(1, testCustomerAccount.findItemFromThisAccount(2).size());
     }
 
+    @Test
+    void testRemainingLendingTime() {
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.addItem(testItem2);
+        testCustomerAccount.addItem(testItem1);
+        assertEquals(23, testCustomerAccount.remainingLendingTime(1));
+    }
+
 
 }

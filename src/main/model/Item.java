@@ -10,7 +10,7 @@ public class Item {
     private String name;
 
 
-    
+
 
     public Item(String name, int itemId, int period, int rent) {
         this.period = period;
@@ -23,11 +23,19 @@ public class Item {
         return this.itemId;
     }
 
+    public int getRent() {
+        return this.rent;
+    }
+
     public int rentCalculatorPerItem() {
         return ((this.period) * (this.rent));
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public int getPeriod() {
+        return this.period;
     }
 }

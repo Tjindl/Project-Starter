@@ -94,4 +94,18 @@ public class CustomerAccount {
         return this.paymentLog;
     }
 
+
+    public int remainingLendingTime(int itemid) {
+        int ans = 0;
+        for (Item i : this.itemlist) {
+            if (itemid == i.getItemId()) {
+                ans = (maxDuration - i.getPeriod());
+                break;
+            }
+        }
+        return ans;
+    }
+
+
+
 }
