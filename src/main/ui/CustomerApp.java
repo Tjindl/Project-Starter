@@ -4,6 +4,7 @@ import model.CustomerAccount;
 import model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -180,8 +181,12 @@ public class CustomerApp {
                     System.out.print("required list: ");
                     System.out.println(Arrays.toString((ca1.findItemFromThisAccount(1)).toArray()));
                 } else if (amt == 2) {
+                    List lst = ca1.findItemFromThisAccount(amt);
                     System.out.print("required list: ");
-                    System.out.println(Arrays.toString((ca1.findItemFromThisAccount(2)).toArray()));
+                    for (int i = 0; i < lst.size(); i++) {
+                        System.out.println(lst.get(i));
+                    }
+
                 } else {
                     System.out.println("Selection not valid...");
                 }
@@ -216,7 +221,7 @@ public class CustomerApp {
 
 
     // MODIFIES: this
-    // EFFECTS: adds a new customner to the system
+    // EFFECTS: adds a new customer to the system
     private void doAddCustomer() {
         System.out.print("Enter your name: ");
         String str = input.next();
@@ -269,6 +274,7 @@ public class CustomerApp {
         System.out.println("\tli -> list of items rented");
         System.out.println("\trlt -> remaining lending time");
         System.out.println("\tac -> add customer");
+        System.out.println("\tpl -> payment log");
         System.out.println("\tq -> quit");
     }
 }

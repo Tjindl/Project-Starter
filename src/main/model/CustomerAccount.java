@@ -112,10 +112,10 @@ public class CustomerAccount {
 
     // EFFECTS : gives the list of items of the given item id
     public List findItemFromThisAccount(int itemID) {
-        List<Item> lst = new ArrayList<>();
+        List<Integer> lst = new ArrayList<>();
         for (Item i2 : this.itemlist) {
             if (i2.getItemId() == itemID) {
-                lst.add(i2);
+                lst.add(i2.getItemId());
             }
         }
         return lst;
