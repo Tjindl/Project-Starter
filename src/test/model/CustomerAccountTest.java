@@ -104,6 +104,7 @@ class CustomerAccountTest {
         testCustomerAccount.addItem(testItem1);
         assertEquals(2, testCustomerAccount.findItemFromThisAccount(1).size());
         assertEquals(1, testCustomerAccount.findItemFromThisAccount(2).size());
+        assertEquals(0, testCustomerAccount.findItemFromThisAccount(8).size());
     }
 
     @Test
@@ -112,6 +113,7 @@ class CustomerAccountTest {
         testCustomerAccount.addItem(testItem2);
         testCustomerAccount.addItem(testItem1);
         assertEquals(23, testCustomerAccount.remainingLendingTime(1));
+        assertEquals(0, testCustomerAccount.remainingLendingTime(5));
     }
 
     @Test
