@@ -35,7 +35,7 @@ public class CustomerAccount {
 
 
     // REQUIRES : amount <= balance
-    // MODIFIES : this, paymentLog
+    // MODIFIES : this
     // EFFECTS : Deducts the rent from funds
     public void deductRentFromFunds(int amount) {
         this.balance = this.balance - amount;
@@ -58,6 +58,8 @@ public class CustomerAccount {
         return this.itemlist;
     }
 
+
+    // EFFECTS : calculates the total rent
     public int calculateRent() {
         int totalsofar = 0;
         for (Item i : itemlist) {
@@ -66,11 +68,24 @@ public class CustomerAccount {
         return totalsofar;
     }
 
+    // MODIFIES : this
+    // EFFECTS : adds the item to the list of rented items
     public void addItem(Item i) {
         this.itemlist.add(i);
         allRentedList.add(i);
     }
 
+    public void returnItem(int itemid) {
+        for (Item i : this.itemlist) {
+            if (i.getItemId() == itemid) {
+                this.itemlist.remove(i);
+            }
+            break;
+        }
+    }
+
+    // MODIFIES : this
+    // EFFECTS : removes the item to the list of rented items
     public void removeItem(Item i) {
         for (Item i1 : this.itemlist) {
             if (i1.getItemId() == i.getItemId()) {
@@ -82,16 +97,20 @@ public class CustomerAccount {
         }
     }
 
+    // EFFECTS : calculates the number of rented items
     public int totalItemsRented() {
         return allRentedList.size();
     }
 
 
 
+    // EFFECTS : calculates the total stock
     public int totalStockPresentInStore() {
         return (totalInventory - this.totalItemsRented());
     }
 
+
+    // EFFECTS : gives the list of items of the given item id
     public List findItemFromThisAccount(int itemID) {
         List<Item> lst = new ArrayList<>();
         for (Item i2 : this.itemlist) {
@@ -102,11 +121,13 @@ public class CustomerAccount {
         return lst;
     }
 
+
     public ArrayList<Integer> getPaymentLog() {
         return this.paymentLog;
     }
 
 
+    // EFFECTS : gives the remaining lending time for an item
     public int remainingLendingTime(int itemid) {
         int ans = 0;
         for (Item i : this.itemlist) {
@@ -117,7 +138,5 @@ public class CustomerAccount {
         }
         return ans;
     }
-
-
 
 }

@@ -44,6 +44,8 @@ public class CustomerApp {
 
 
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("d")) {
             doDeposit();
@@ -51,8 +53,8 @@ public class CustomerApp {
             doCalculate();
         } else if (command.equals("b")) {
             doBorrow();
-//        } else if (command.equals("r")) {
-//            doReturn();
+        } else if (command.equals("r")) {
+            doReturn();
         } else if (command.equals("ts")) {
             doAvailableStock();
         } else if (command.equals("rs")) {
@@ -71,6 +73,8 @@ public class CustomerApp {
     }
 
 
+    // MODIFIES: this
+    // EFFECTS: conducts a deposit transaction
     private void doDeposit() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -90,7 +94,8 @@ public class CustomerApp {
 
 
 
-
+    // MODIFIES: this
+    // EFFECTS: Calculates rent
     private void doCalculate() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -104,6 +109,8 @@ public class CustomerApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts a borrow transaction
     private void doBorrow() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -113,10 +120,10 @@ public class CustomerApp {
                 int i = input.nextInt();
                 if (i == 1) {
                     ca.addItem(new Item("Ski", 1,0,15));
-                    System.out.printf("Ski succesfully issued!");
+                    System.out.print("Ski succesfully issued!");
                 } else if (i == 2) {
                     ca.addItem(new Item("Snowboard", 2,0,20));
-                    System.out.printf("Snowboard succesfully issued!");
+                    System.out.print("Snowboard succesfully issued!");
                 } else {
                     System.out.println("Selection not valid...");
                 }
@@ -126,36 +133,42 @@ public class CustomerApp {
         }
     }
 
-//    private void doReturn() {
-//        System.out.print("Enter account id : ");
-//        int amount = input.nextInt();
-//        for (CustomerAccount ca: customerAccounts) {
-//            if (ca.getId() == amount) {
-//                System.out.print("Ski or Snowboard?");
-//                String str = input.next();
-//                if (str == "Ski") {
-//                    ca.addItem(new Item("Ski", 1,0,15));
-//                } else if (str == "Snowboard") {
-//                    ca.addItem(new Item("Snowboard", 2,0,20));
-//                } else {
-//                    System.out.println("Selection not valid...");
-//                }
-//            }
-//            System.out.println("Cannot find your account, please make one\n");
-//        }
-//    }
+    // MODIFIES: this
+    // EFFECTS: conducts a deposit transaction
+    private void doReturn() {
+        System.out.print("Enter account id : ");
+        int amount = input.nextInt();
+        for (CustomerAccount ca: customerAccounts) {
+            if (ca.getId() == amount) {
+                System.out.print("Enter item id : ");
+                int itemid = input.nextInt();
+                ca.returnItem(itemid);
+                System.out.println("returned!");
+            } else {
+                System.out.println("Cannot find your account, please make one\n");
+            }
+        }
+    }
 
+
+
+
+    // EFFECTS: gives available stock
     private void doAvailableStock() {
         int i = ca1.totalStockPresentInStore();
         System.out.print("Available stock: ");
         System.out.println(Integer.toString(i));
     }
 
+
+    // EFFECTS: gives rented stock
     private void doRentedStock() {
         System.out.print("rented stock: ");
         System.out.println(Integer.toString(ca1.totalItemsRented()));
     }
 
+
+    // EFFECTS: gives item list of the given item id from a given account
     private void doListItem() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -177,6 +190,8 @@ public class CustomerApp {
         }
     }
 
+
+    // EFFECTS: gives the remaining lending time of the given item
     private void doRemainingTime() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -200,6 +215,8 @@ public class CustomerApp {
 
 
 
+    // MODIFIES: this
+    // EFFECTS: adds a new customner to the system
     private void doAddCustomer() {
         System.out.print("Enter your name: ");
         String str = input.next();
@@ -211,6 +228,7 @@ public class CustomerApp {
     }
 
 
+    // EFFECTS: gives the payment log for a given customer
     private void doPaymentLog() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
@@ -245,13 +263,12 @@ public class CustomerApp {
         System.out.println("\td -> deposit");
         System.out.println("\tcr -> Calculate rent");
         System.out.println("\tb -> borrow item");
-//        System.out.println("\tr -> return item");
+        System.out.println("\tr -> return item");
         System.out.println("\tts -> see available stock");
         System.out.println("\trs -> rented stock");
         System.out.println("\tli -> list of items rented");
         System.out.println("\trlt -> remaining lending time");
+        System.out.println("\tac -> add customer");
         System.out.println("\tq -> quit");
     }
-
-
 }

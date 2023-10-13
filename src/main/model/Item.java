@@ -12,6 +12,8 @@ public class Item {
 
 
 
+    // MODIFIES : this
+    // EFFECTS : Constructs an item
     public Item(String name, int itemId, int period, int rent) {
         this.period = period;
         this.itemId = itemId;
@@ -27,6 +29,7 @@ public class Item {
         return this.rent;
     }
 
+    //EFFECTS : calculates the rent of that particular item
     public int rentCalculatorPerItem() {
         return ((this.period) * (this.rent));
     }

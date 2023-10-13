@@ -111,5 +111,14 @@ class CustomerAccountTest {
         assertEquals(23, testCustomerAccount.remainingLendingTime(1));
     }
 
+    @Test
+    void testReturnItem() {
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.addItem(testItem2);
+        testCustomerAccount.addItem(testItem1);
+        testCustomerAccount.returnItem(1);
+        assertEquals(2, testCustomerAccount.getItemlist().size());
+    }
+
 
 }
