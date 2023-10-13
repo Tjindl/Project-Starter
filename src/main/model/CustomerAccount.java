@@ -25,7 +25,7 @@ public class CustomerAccount {
     }
 
     // REQUIRES : amount >=0
-    // MODIFIES : this
+    // MODIFIES : this, payment log
     // EFFECTS : Deposits the amount in tha balance and notes a log of the deposit
     public void deposit(int amount) {
         this.balance = this.balance + amount;
@@ -35,6 +35,8 @@ public class CustomerAccount {
 
 
     // REQUIRES : amount <= balance
+    // MODIFIES : this, paymentLog
+    // EFFECTS : Deducts the rent from funds
     public void deductRentFromFunds(int amount) {
         this.balance = this.balance - amount;
         this.paymentLog.add(-amount);
@@ -75,8 +77,8 @@ public class CustomerAccount {
                 this.itemlist.remove(i1);
                 allRentedList.remove(i1);
                 this.balance = this.balance - i1.rentCalculatorPerItem();
-                break;
             }
+            break;
         }
     }
 
@@ -110,8 +112,8 @@ public class CustomerAccount {
         for (Item i : this.itemlist) {
             if (itemid == i.getItemId()) {
                 ans = (maxDuration - i.getPeriod());
-                break;
             }
+            break;
         }
         return ans;
     }
