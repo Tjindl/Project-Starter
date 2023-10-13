@@ -56,6 +56,7 @@ class CustomerAccountTest {
         assertEquals(105, testCustomerAccount.calculateRent());
         testCustomerAccount.addItem(testItem2);
         assertEquals(165, testCustomerAccount.calculateRent());
+
     }
 
     @Test
@@ -77,6 +78,8 @@ class CustomerAccountTest {
         ArrayList<Item> testList1 = testCustomerAccount.getItemlist();
         assertEquals(1, testList1.size());
         assertEquals("Snowboard", testList1.get(0).getName());
+        testCustomerAccount.removeItem(testItem1);
+        assertEquals(1, testList1.size());
     }
 
     @Test
@@ -117,6 +120,7 @@ class CustomerAccountTest {
         testCustomerAccount.addItem(testItem2);
         testCustomerAccount.addItem(testItem1);
         testCustomerAccount.returnItem(1);
+        testCustomerAccount.returnItem(5);
         assertEquals(2, testCustomerAccount.getItemlist().size());
     }
 
