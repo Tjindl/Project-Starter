@@ -2,7 +2,11 @@ package ui;
 
 import model.CustomerAccount;
 import model.Item;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,12 +14,21 @@ import java.util.Arrays;
 
 public class CustomerApp {
     private CustomerAccount ca1;
+
     private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
     private Scanner input;
+    private static final String JSON_STORE = "./data/workroom.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+
 
 
     // EFFECTS: runs the CustomerApp application
     public CustomerApp() {
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runCustomer();
     }
 
@@ -33,7 +46,16 @@ public class CustomerApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
-                keepGoing = false;
+                String command2 = null;
+                System.out.println("Do you want to save your work? \n y->yes and n->no and l->load");
+                command2 = input.next();
+                if (command2 == "n") {
+                    keepGoing = false;
+                } else if (command2 == "l") {
+                    loadWorkRoom();
+                } else {
+                    saveWorkRoom();
+                }
             } else {
                 processCommand(command);
             }
@@ -43,6 +65,27 @@ public class CustomerApp {
     }
 
 
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(ca1);
+            jsonWriter.close();
+            System.out.println("Saved " + .getId() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            ca1 = jsonReader.read();
+            System.out.println("Loaded " + ca1.getId() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 
     // MODIFIES: this
@@ -92,6 +135,8 @@ public class CustomerApp {
             }
         }
     }
+
+
 
 
 
@@ -228,6 +273,7 @@ public class CustomerApp {
         System.out.print("Please enter your deposit ");
         int amt = input.nextInt();
         CustomerAccount nct = new CustomerAccount(str,amt);
+        this.customerAccounts.add(nct);
         System.out.print("A new account has been added, Account id: ");
         System.out.println(Integer.toString(nct.getId()));
     }

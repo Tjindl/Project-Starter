@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Item {
@@ -40,5 +42,15 @@ public class Item {
 
     public int getPeriod() {
         return this.period;
+    }
+
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.itemId);
+        json.put("name", this.name);
+        json.put("period", this.period);
+        json.put("rent", this.rent);
+        return json;
     }
 }

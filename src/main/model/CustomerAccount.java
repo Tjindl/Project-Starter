@@ -1,27 +1,33 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerAccount {
+public class CustomerAccount implements Writable{
     private ArrayList<Item> itemlist;
     private int id;
     private int balance;
-    private static int nextAccountId = 1;
+    private static int nextAccountId = 0;
     private ArrayList<Integer> paymentLog;
     private ArrayList<Item> allRentedList = new ArrayList<>();
     private final int totalInventory = 50;
     private final int maxDuration = 30;
+    private ArrayList<String> custList = new ArrayList<>();
 
 
     // MODIFIES : this
     // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
         this.balance = deposit;
-        this.id = nextAccountId;
+        this.id = nextAccountId++;
         this.itemlist = new ArrayList<Item>();
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
+        custList.add(name);
     }
 
     // REQUIRES : amount >=0
@@ -31,6 +37,11 @@ public class CustomerAccount {
         this.balance = this.balance + amount;
         this.paymentLog.add(amount);
 
+    }
+
+
+    public ArrayList<String> getCustList() {
+        return custList;
     }
 
 
@@ -122,6 +133,7 @@ public class CustomerAccount {
     }
 
 
+
     public ArrayList<Integer> getPaymentLog() {
         return this.paymentLog;
     }
@@ -139,4 +151,21 @@ public class CustomerAccount {
         return ans;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("balance", this.balance);
+        return json;
+    }
+
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : itemlist) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 }

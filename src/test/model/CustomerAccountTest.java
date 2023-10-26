@@ -22,7 +22,7 @@ class CustomerAccountTest {
     @Test
     void testConstructor() {
         assertEquals(500, testCustomerAccount.getBalance());
-        assertEquals(1, testCustomerAccount.getId());
+        assertEquals(10, testCustomerAccount.getId());
         ArrayList<Integer> tstPaymentLog = testCustomerAccount.getPaymentLog();
         assertEquals(1, tstPaymentLog.size());
         assertEquals(500, tstPaymentLog.get(0));
@@ -48,6 +48,8 @@ class CustomerAccountTest {
         testCustomerAccount.deductRentFromFunds(200);
         assertEquals(200, testCustomerAccount.getBalance());
     }
+
+
 
     @Test
     void testCalculateRent() {
