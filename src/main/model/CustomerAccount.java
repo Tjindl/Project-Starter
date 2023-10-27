@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents a customer account and its properties
-public class CustomerAccount implements Writable {
+public class CustomerAccount{
     private String name;
     private ArrayList<Item> itemlist;
     private int id;
@@ -160,26 +160,26 @@ public class CustomerAccount implements Writable {
         return ans;
     }
 
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("id", this.id);
-        json.put("balance", this.balance);
-        json.put("payment_log", this.paymentLog);
-        json.put("items", itemsToJson());
-        json.put("calculated rent", calculateRent());
-        return json;
-    }
+//    @Override
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("id", this.id);
+//        json.put("balance", this.balance);
+//        json.put("payment_log", this.paymentLog);
+//        json.put("items", itemsToJson());
+//        json.put("calculated rent", calculateRent());
+//        return json;
+//    }
 
-    private JSONArray itemsToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Item i : itemlist) {
-            jsonArray.put(i.toJson());
-        }
-
-        return jsonArray;
-    }
+//    private JSONArray itemsToJson() {
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (Item i : itemlist) {
+//            jsonArray.put(i.toJson());
+//        }
+//
+//        return jsonArray;
+//    }
 
 
     public String getName() {
