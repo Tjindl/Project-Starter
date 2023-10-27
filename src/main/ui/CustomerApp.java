@@ -42,8 +42,7 @@ public class CustomerApp {
         init();
         while (keepGoing) {
             displayMenu();
-            command = input.next();
-            command = command.toLowerCase();
+            command = input.next().toLowerCase();
             if (command.equals("q")) {
                 String command2 = null;
                 System.out.println("Do you want to save your work? \n y->yes and n->no and l->load");
@@ -69,10 +68,10 @@ public class CustomerApp {
         try {
             System.out.println(existingCustomerAccounts);
             existingCustomerAccounts.addAll(customerAccounts);
-                jsonWriter.open();
-                jsonWriter.write(existingCustomerAccounts);
-                jsonWriter.close();
-                System.out.println("Saved " + existingCustomerAccounts.toString() + " to " + JSON_STORE);
+            jsonWriter.open();
+            jsonWriter.write(existingCustomerAccounts);
+            jsonWriter.close();
+            System.out.println("Saved " + existingCustomerAccounts.toString() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
