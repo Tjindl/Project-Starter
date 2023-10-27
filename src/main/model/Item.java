@@ -46,13 +46,13 @@ public class Item {
     }
 
 
-    // Function to convert item to json object
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("id", this.itemId);
-        json.put("name", this.name);
-        json.put("period", this.period);
-        json.put("rent", this.rent);
-        return json;
-    }
+//    // Function to convert item to json object
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("id", this.itemId);
+//        json.put("name", this.name);
+//        json.put("period", this.period);
+//        json.put("rent", this.rent);
+//        return json;
+//    }
 }

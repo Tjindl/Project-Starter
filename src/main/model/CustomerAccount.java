@@ -57,9 +57,9 @@ public class CustomerAccount {
         return this.id;
     }
 
-    public int setId(int i) {
-        return this.id = i;
-    }
+//    public int setId(int i) {
+//        return this.id = i;
+//    }
 
     public int getBalance() {
         return this.balance;
