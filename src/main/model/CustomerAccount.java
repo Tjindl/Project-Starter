@@ -185,4 +185,8 @@ public class CustomerAccount {
     public String getName() {
         return this.name;
     }
+
+    public void setId(int i) {
+        this.id = i;
+    }
 }
