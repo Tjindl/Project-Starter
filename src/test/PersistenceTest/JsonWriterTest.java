@@ -49,26 +49,28 @@ class JsonWriterTest extends JsonTest {
         }
     }
 
-//    @Test
-//    void testWriterGeneralWorkroom() {
-//        try {
-//            CustomerAccount customerAccount = new CustomerAccount("My Account", 10);
-//            customerAccount.addItem(new Item("Ski", 1, 1, 15));
-//            customerAccount.addItem(new Item("Ski", 1,5,15));
-//            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
-//            writer.open();
-//            writer.write(customerAccount);
-//            writer.close();
-//
-//            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-//            customerAccount = reader.read();
-//            assertEquals("My Acccount", customerAccount.getName());
-//            customerAccount.addItem(new Item("Ski", 1, 5, 15));
-//            List<Item> items = customerAccount.getItemlist();
-//            assertEquals(1, items.size());
-//            checkItem("Ski", items.get(0));
-//        } catch (IOException e) {
-//            fail("Exception should not have been thrown");
-//        }
-//    }
+    @Test
+    void testWriterGeneralWorkroom() {
+        try {
+            ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
+            CustomerAccount customerAccount = new CustomerAccount("My Account", 10);
+            customerAccounts.add(customerAccount);
+            customerAccount.addItem(new Item("Ski", 1, 1, 15));
+            customerAccount.addItem(new Item("Ski", 1,5,15));
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            writer.open();
+            writer.write(customerAccounts);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+//            customerAccounts = reader.read();
+            assertEquals("My Account", customerAccount.getName());
+            customerAccount.addItem(new Item("Ski", 1, 5, 15));
+            List<Item> items = customerAccount.getItemlist();
+            assertEquals(3, items.size());
+            checkItem("Ski", items.get(0));
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
 }
