@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAccount implements Writable{
+    private String name;
     private ArrayList<Item> itemlist;
     private int id;
     private int balance;
     private static int nextAccountId = 0;
     private ArrayList<Integer> paymentLog;
     private ArrayList<Item> allRentedList = new ArrayList<>();
-    private final int totalInventory = 50;
+    public final int totalInventory = 50;
     private final int maxDuration = 30;
     private ArrayList<String> custList = new ArrayList<>();
 
@@ -22,9 +23,10 @@ public class CustomerAccount implements Writable{
     // MODIFIES : this
     // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
+        this.name = name;
         this.balance = deposit;
         this.id = nextAccountId++;
-        this.itemlist = new ArrayList<Item>();
+        this.itemlist = new ArrayList<>();
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
         custList.add(name);
@@ -90,6 +92,7 @@ public class CustomerAccount implements Writable{
         for (Item i : this.itemlist) {
             if (i.getItemId() == itemid) {
                 this.itemlist.remove(i);
+                this.balance = this.balance + i.getRent();
             }
             break;
         }
@@ -156,6 +159,9 @@ public class CustomerAccount implements Writable{
         JSONObject json = new JSONObject();
         json.put("id", this.id);
         json.put("balance", this.balance);
+        json.put("payment_log", this.paymentLog);
+        json.put("items", itemsToJson());
+        json.put("calculated rent", calculateRent());
         return json;
     }
 
@@ -167,5 +173,10 @@ public class CustomerAccount implements Writable{
         }
 
         return jsonArray;
+    }
+
+
+    public String getName() {
+        return this.name;
     }
 }

@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class CustomerApp {
     private CustomerAccount ca1;
 
+    public final int totalInventory = 50;
     private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
     private Scanner input;
     private static final String JSON_STORE = "./data/workroom.json";
@@ -51,11 +52,11 @@ public class CustomerApp {
                 command2 = input.next();
                 if (command2 == "n") {
                     keepGoing = false;
-                } else if (command2 == "l") {
-                    loadWorkRoom();
-                } else {
-                    saveWorkRoom();
-                }
+                  } else if (command2 == "l") {
+                      loadWorkRoom();
+                  } else {
+                      saveWorkRoom();
+                  }
             } else {
                 processCommand(command);
             }
@@ -67,20 +68,26 @@ public class CustomerApp {
 
     private void saveWorkRoom() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(ca1);
-            jsonWriter.close();
-            System.out.println("Saved " + .getId() + " to " + JSON_STORE);
+            for (CustomerAccount ca : customerAccounts) {
+                jsonWriter.open();
+                jsonWriter.write(ca);
+                jsonWriter.close();
+                System.out.println("Saved " + ca.getId() + " to " + JSON_STORE);
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads workroom from file
+//     MODIFIES: this
+//     EFFECTS: loads workroom from file
     private void loadWorkRoom() {
         try {
-            ca1 = jsonReader.read();
+            for (CustomerAccount ca : customerAccounts) {
+                ca = jsonReader.read();
+                System.out.println("Loaded " + ca.getId() + " from " + JSON_STORE);
+            }
+            ca1= jsonReader.read();
             System.out.println("Loaded " + ca1.getId() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
@@ -149,10 +156,10 @@ public class CustomerApp {
             if (ca.getId() == amount) {
                 System.out.print("Your total rent is: ");
                 System.out.println(Integer.toString(ca.calculateRent()));
+                break;
             }
-            System.out.println("Cannot find your account, please make one\n");
         }
-
+        System.out.println("Cannot find your account, please make one\n");
     }
 
     // MODIFIES: this
@@ -166,10 +173,10 @@ public class CustomerApp {
                 int i = input.nextInt();
                 if (i == 1) {
                     ca.addItem(new Item("Ski", 1,0,15));
-                    System.out.print("Ski succesfully issued!");
+                    System.out.print("Ski successfully issued!");
                 } else if (i == 2) {
                     ca.addItem(new Item("Snowboard", 2,0,20));
-                    System.out.print("Snowboard succesfully issued!");
+                    System.out.print("Snowboard successfully issued!");
                 } else {
                     System.out.println("Selection not valid...");
                 }
@@ -201,16 +208,23 @@ public class CustomerApp {
 
     // EFFECTS: gives available stock
     private void doAvailableStock() {
-        int i = ca1.totalStockPresentInStore();
+        int count = 0;
+        for (CustomerAccount ca : customerAccounts) {
+            count = ca.getItemlist().size() + count;
+        }
         System.out.print("Available stock: ");
-        System.out.println(Integer.toString(i));
+        System.out.println(Integer.toString(totalInventory - count));
     }
 
 
     // EFFECTS: gives rented stock
     private void doRentedStock() {
+        int count = 0;
+        for (CustomerAccount ca : customerAccounts) {
+            count = ca.getItemlist().size() + count;
+        }
         System.out.print("rented stock: ");
-        System.out.println(Integer.toString(ca1.totalItemsRented()));
+        System.out.println(Integer.toString(count));
     }
 
 
@@ -224,9 +238,9 @@ public class CustomerApp {
                 int amt = input.nextInt();
                 if (amt == 1) {
                     System.out.print("required list: ");
-                    System.out.println(Arrays.toString((ca1.findItemFromThisAccount(1)).toArray()));
+                    System.out.println(Arrays.toString((ca.findItemFromThisAccount(1)).toArray()));
                 } else if (amt == 2) {
-                    List lst = ca1.findItemFromThisAccount(amt);
+                    List lst = ca.findItemFromThisAccount(amt);
                     System.out.print("required list: ");
                     for (int i = 0; i < lst.size(); i++) {
                         System.out.println(lst.get(i));
@@ -251,10 +265,10 @@ public class CustomerApp {
                 int amt = input.nextInt();
                 if (amt == 1) {
                     System.out.print("required list: ");
-                    System.out.println(Integer.toString(ca1.remainingLendingTime(1)));
+                    System.out.println(Integer.toString(ca.remainingLendingTime(1)));
                 } else if (amt == 2) {
                     System.out.print("required list: ");
-                    System.out.println(Integer.toString(ca1.remainingLendingTime(2)));
+                    System.out.println(Integer.toString(ca.remainingLendingTime(2)));
                 } else {
                     System.out.println("Selection not valid...");
                 }
