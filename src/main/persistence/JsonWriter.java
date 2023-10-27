@@ -1,4 +1,5 @@
 package persistence;
+
 import model.CustomerAccount;
 
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ public class JsonWriter {
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-       writer = new PrintWriter(new File(destination));
+        writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this

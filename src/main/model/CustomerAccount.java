@@ -7,7 +7,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerAccount implements Writable{
+public class CustomerAccount implements Writable {
     private String name;
     private ArrayList<Item> itemlist;
     private int id;
