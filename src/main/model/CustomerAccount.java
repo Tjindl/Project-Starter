@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents a customer account and its properties
-public class CustomerAccount{
+public class CustomerAccount {
     private String name;
     private ArrayList<Item> itemlist;
     private int id;
