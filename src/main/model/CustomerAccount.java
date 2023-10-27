@@ -7,6 +7,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a customer account and its properties
 public class CustomerAccount implements Writable {
     private String name;
     private ArrayList<Item> itemlist;
@@ -17,7 +18,7 @@ public class CustomerAccount implements Writable {
     private ArrayList<Item> allRentedList = new ArrayList<>();
     public final int totalInventory = 50;
     private final int maxDuration = 30;
-    private ArrayList<String> custList = new ArrayList<>();
+
 
 
     // MODIFIES : this
@@ -29,7 +30,7 @@ public class CustomerAccount implements Writable {
         this.itemlist = new ArrayList<>();
         this.paymentLog = new ArrayList<>();
         paymentLog.add(deposit);
-        custList.add(name);
+
     }
 
     // REQUIRES : amount >=0
@@ -42,9 +43,6 @@ public class CustomerAccount implements Writable {
     }
 
 
-    public ArrayList<String> getCustList() {
-        return custList;
-    }
 
 
     // REQUIRES : amount <= balance
@@ -71,6 +69,10 @@ public class CustomerAccount implements Writable {
         return this.itemlist;
     }
 
+    public void setItemlist(ArrayList<Item> itemlist) {
+        this.itemlist = itemlist;
+    }
+
 
     // EFFECTS : calculates the total rent
     public int calculateRent() {
@@ -88,11 +90,14 @@ public class CustomerAccount implements Writable {
         allRentedList.add(i);
     }
 
+
+    // MODIFIES : this
+    // EFFECTS : returns an item and deducts its rent from the account balance
     public void returnItem(int itemid) {
         for (Item i : this.itemlist) {
             if (i.getItemId() == itemid) {
                 this.itemlist.remove(i);
-                this.balance = this.balance + i.getRent();
+                this.balance = this.balance - i.getRent();
             }
             break;
         }
@@ -137,6 +142,7 @@ public class CustomerAccount implements Writable {
 
 
 
+    // EFFECTS : gives the list of payments made by a customer
     public ArrayList<Integer> getPaymentLog() {
         return this.paymentLog;
     }

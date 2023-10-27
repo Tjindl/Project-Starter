@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
+// Represents the items and their properties
 public class Item {
     private int period;
     private int rent;
@@ -45,6 +46,7 @@ public class Item {
     }
 
 
+    // Function to convert item to json object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("id", this.itemId);

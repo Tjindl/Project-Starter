@@ -1,0 +1,57 @@
+{"customers": [
+    {
+        "balance": 1000,
+        "name": "Tulsi",
+        "itemlist": [{
+            "itemId": 1,
+            "period": 2,
+            "name": "Ski",
+            "rent": 15
+        }],
+        "id": 0,
+        "paymentLog": [1000]
+    },
+    {
+        "balance": 2000,
+        "name": "Tushar",
+        "itemlist": [{
+            "itemId": 1,
+            "period": 2,
+            "name": "Ski",
+            "rent": 15
+        }],
+        "id": 1,
+        "paymentLog": [2000]
+    },
+    {
+        "balance": 200,
+        "name": "vsbj",
+        "itemlist": [{
+            "itemId": 1,
+            "period": 0,
+            "name": "Ski",
+            "rent": 15
+        }],
+        "id": 2,
+        "paymentLog": [200]
+    },
+    {
+        "balance": 2000,
+        "name": "vjfns",
+        "itemlist": [{
+            "itemId": 1,
+            "period": 0,
+            "name": "Ski",
+            "rent": 15
+        }],
+        "id": 3,
+        "paymentLog": [2000]
+    },
+    {
+        "balance": 200,
+        "name": "jnasvn",
+        "itemlist": [],
+        "id": 4,
+        "paymentLog": [200]
+    }
+]}

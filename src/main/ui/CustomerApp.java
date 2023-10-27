@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
 
+// Represents the app/ console ui for the program
 public class CustomerApp {
-    private CustomerAccount ca1;
-
+    private ArrayList<CustomerAccount> existingCustomerAccounts = new ArrayList<>();
+    CustomerAccount ca1;
     public final int totalInventory = 50;
     private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
     private Scanner input;
-    private static final String JSON_STORE = "./data/workroom.json";
+    private static final String JSON_STORE = "./data/workroomSample.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -53,6 +54,7 @@ public class CustomerApp {
                     loadWorkRoom();
                 } else {
                     saveWorkRoom();
+                    keepGoing = false;
                 }
             } else {
                 processCommand(command);
@@ -62,29 +64,26 @@ public class CustomerApp {
     }
 
 
+    // MODIFIES : saves the data to a json file.
     private void saveWorkRoom() {
         try {
-            for (CustomerAccount ca : customerAccounts) {
+            System.out.println(existingCustomerAccounts);
+            existingCustomerAccounts.addAll(customerAccounts);
                 jsonWriter.open();
-                jsonWriter.write(ca);
+                jsonWriter.write(existingCustomerAccounts);
                 jsonWriter.close();
-                System.out.println("Saved " + ca.getId() + " to " + JSON_STORE);
-            }
+                System.out.println("Saved " + existingCustomerAccounts.toString() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
 //     MODIFIES: this
-//     EFFECTS: loads workroom from file
+//     EFFECTS: loads data from file
     private void loadWorkRoom() {
         try {
-            for (CustomerAccount ca : customerAccounts) {
-                ca = jsonReader.read();
-                System.out.println("Loaded " + ca.getId() + " from " + JSON_STORE);
-            }
-            ca1 = jsonReader.read();
-            System.out.println("Loaded " + ca1.getId() + " from " + JSON_STORE);
+            existingCustomerAccounts = jsonReader.read();
+            System.out.println("Loaded " + existingCustomerAccounts.toString() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
@@ -161,10 +160,12 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: conducts a borrow transaction
     private void doBorrow() {
+        boolean accountFound = false;
         System.out.print("Enter account id : ");
-        int amount = input.nextInt();
-        for (CustomerAccount ca: customerAccounts) {
-            if (ca.getId() == amount) {
+        int accountId = input.nextInt();
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == accountId) {
+                accountFound = true;
                 System.out.print("enter 1 for Ski or 2 for Snowboard?");
                 int i = input.nextInt();
                 if (i == 1) {
@@ -176,9 +177,11 @@ public class CustomerApp {
                 } else {
                     System.out.println("Selection not valid...");
                 }
-            } else {
-                System.out.println("Cannot find your account, please make one\n");
+                break;
             }
+        }
+        if (!accountFound) {
+            System.out.println("Cannot find your account, please make one\n");
         }
     }
 
@@ -279,10 +282,10 @@ public class CustomerApp {
     // EFFECTS: adds a new customer to the system
     private void doAddCustomer() {
         System.out.print("Enter your name: ");
-        String str = input.next();
+        String name = input.next();
         System.out.print("Please enter your deposit ");
-        int amt = input.nextInt();
-        CustomerAccount nct = new CustomerAccount(str,amt);
+        int deposit = input.nextInt();
+        CustomerAccount nct = new CustomerAccount(name,deposit);
         this.customerAccounts.add(nct);
         System.out.print("A new account has been added, Account id: ");
         System.out.println(Integer.toString(nct.getId()));
@@ -308,13 +311,14 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: initializes accounts
     private void init() {
-        ca1 = new CustomerAccount("Tushar", 500);
-        ca1.setId(2);
-        ca1.addItem(new Item("Ski", 1, 2, 15));
+//        ca1 = new CustomerAccount("Tushar", 500);
+//        ca1.setId(2);
+//        ca1.addItem(new Item("Ski", 1, 2, 15));
 
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-        customerAccounts.add(ca1);
+        loadWorkRoom();
+//        input = new Scanner(System.in);
+//        input.useDelimiter("\n");
+//        customerAccounts.add(ca1);
     }
 
 

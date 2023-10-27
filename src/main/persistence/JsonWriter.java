@@ -6,8 +6,11 @@ import org.json.JSONObject;
 
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of Customer Account to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -26,9 +29,11 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
-    public void write(CustomerAccount customerAccount) {
-        JSONObject json = customerAccount.toJson();
+    // EFFECTS: writes JSON representation of CustomerAccount to file
+    public void write(ArrayList<CustomerAccount> customerAccountList) {
+        Map<String, ArrayList<CustomerAccount>> map = new HashMap<>();
+        map.put("customers", customerAccountList);
+        JSONObject json = new JSONObject(map);
         saveToFile(json.toString(TAB));
     }
 

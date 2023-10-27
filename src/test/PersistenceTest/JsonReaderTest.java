@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            CustomerAccount customerAccount = reader.read();
+            ArrayList<CustomerAccount> customerAccounts = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -29,8 +30,8 @@ class JsonReaderTest extends JsonTest {
     void testReaderEmptyWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
         try {
-            CustomerAccount customerAccount = reader.read();
-            assertEquals(1, customerAccount.getId());
+            ArrayList<CustomerAccount> customerAccounts = reader.read();
+            assertEquals(0, customerAccounts.size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -40,11 +41,11 @@ class JsonReaderTest extends JsonTest {
     void testReaderGeneralWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralWorkRoom.json");
         try {
-            CustomerAccount customerAccount = reader.read();
-            assertEquals(1, customerAccount.getId());
-            customerAccount.addItem(new Item("Ski", 1, 5, 15));
-            List<Item> items = customerAccount.getItemlist();
-            assertEquals(1, items.size());
+            ArrayList<CustomerAccount> customerAccounts = reader.read();
+            assertEquals(0, customerAccounts.get(0).getId());
+            customerAccounts.get(0).addItem(new Item("Ski", 1, 5, 15));
+            List<Item> items = customerAccounts.get(0).getItemlist();
+            assertEquals(2, items.size());
             checkItem("Ski", items.get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
