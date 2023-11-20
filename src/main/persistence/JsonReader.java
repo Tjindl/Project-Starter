@@ -68,7 +68,7 @@ public class JsonReader {
     private ArrayList<Integer> parsePaymentLog(JSONArray jsonArray) {
         ArrayList<Integer> paymentlist = new ArrayList<>();
         //Integer[] payList = new Integer[jsonArray.length()];
-        for (int i=0; i<jsonCustomerPaymentLog.length();i++){
+        for (int i = 0; i < jsonCustomerPaymentLog.length();i++) {
             paymentlist.add((Integer)jsonArray.get(i));
         }
         return paymentlist;

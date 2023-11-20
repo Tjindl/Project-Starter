@@ -2,7 +2,6 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ public class CustomerAccount {
     public void setPaymentLog(ArrayList<Integer> paymentLog) {
         this.paymentLog = paymentLog;
     }
+
     // MODIFIES : this
     // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
@@ -169,7 +169,7 @@ public class CustomerAccount {
 
 
 
-    public JSONObject CustomerAccountToJson() {
+    public JSONObject customerAccountToJson() {
         JSONObject json = new JSONObject();
         json.put("id", this.id);
         json.put("name", this.name);

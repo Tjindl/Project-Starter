@@ -205,6 +205,7 @@ public class CustomerApp {
         return 0;
     }
 
+    @SuppressWarnings("methodlength")
     // MODIFIES: this
     // EFFECTS: conducts a borrow transaction
     private void doBorrow() {
@@ -271,7 +272,8 @@ public class CustomerApp {
             }
         }
     }
-    public void doReturn(int accId , int itemId) {
+
+    public void doReturn(int accId, int itemId) {
         for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == accId) {
                 ca.returnItem(itemId);
@@ -406,6 +408,7 @@ public class CustomerApp {
         }
         System.out.println("Cannot find your account, please make one\n");
     }
+
     public ArrayList<Integer> doPaymentLog(int customerAcc) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == customerAcc) {
