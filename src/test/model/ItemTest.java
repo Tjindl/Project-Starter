@@ -18,12 +18,12 @@ public class ItemTest {
     @Test
     void testConstructor() {
         assertEquals("Ski", testItem1.getname());
-        assertEquals(1, testItem1.getitemid());
+        assertEquals(1, testItem1.getItemId());
         assertEquals(7, testItem1.getperiod());
         assertEquals(15, testItem1.getrent());
 
         assertEquals("Snowboard", testItem2.getname());
-        assertEquals(2, testItem2.getitemid());
+        assertEquals(2, testItem2.getItemId());
         assertEquals(3, testItem2.getperiod());
         assertEquals(20, testItem2.getrent());
     }
