@@ -9,7 +9,7 @@
       "rent": 15
     }],
     "id": 0,
-    "paymentLog": [1000]
+    "payment_log": [1000]
   },
   {
     "balance": 2000,
@@ -21,7 +21,7 @@
       "rent": 15
     }],
     "id": 1,
-    "paymentLog": [2000]
+    "payment_log": [2000]
   },
   {
     "balance": 200,
@@ -33,7 +33,7 @@
       "rent": 15
     }],
     "id": 2,
-    "paymentLog": [200]
+    "payment_log": [200]
   },
   {
     "balance": 2000,
@@ -45,13 +45,13 @@
       "rent": 15
     }],
     "id": 3,
-    "paymentLog": [2000]
+    "payment_log": [2000]
   },
   {
     "balance": 200,
     "name": "jnasvn",
     "itemlist": [],
     "id": 4,
-    "paymentLog": [200]
+    "payment_log": [200]
   }
 ]}

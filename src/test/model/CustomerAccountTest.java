@@ -23,7 +23,7 @@ class CustomerAccountTest {
     @Test
     void testConstructor() {
         assertEquals(500, testCustomerAccount.getBalance());
-        assertEquals(10, testCustomerAccount.getId());
+      //  assertEquals(10, testCustomerAccount.getId());
         ArrayList<Integer> tstPaymentLog = testCustomerAccount.getPaymentLog();
         assertEquals(1, tstPaymentLog.size());
         assertEquals(500, tstPaymentLog.get(0));

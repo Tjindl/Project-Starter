@@ -1,10 +1,10 @@
 package PersistenceTest;
 
-import ca.ubc.cpsc210.rentalshop.model.model.CustomerAccount;
-import ca.ubc.cpsc210.rentalshop.model.model.Item;
+
 
 import org.junit.jupiter.api.Test;
 
+import model.*;
 import persistence.JsonReader;
 
 import java.io.IOException;

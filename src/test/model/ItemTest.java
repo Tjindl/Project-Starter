@@ -1,5 +1,5 @@
 package model;
-import ca.ubc.cpsc210.rentalshop.model.model.Item;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
