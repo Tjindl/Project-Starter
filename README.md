@@ -18,3 +18,6 @@ An example of text with **bold** and *italic* fonts.
 - A user will be able to get the payment log of a customer.
 - A user will be able to generate a bill for a customer.
 - A user will be able to get the remaining lending time for each item.
+
+
+Referred to alarm system project and some online swing documentation

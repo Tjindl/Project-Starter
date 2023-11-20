@@ -2,6 +2,8 @@ package persistence;
 
 import model.CustomerAccount;
 
+import model.Item;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -31,11 +33,22 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of CustomerAccount to file
     public void write(ArrayList<CustomerAccount> customerAccountList) {
-        Map<String, ArrayList<CustomerAccount>> map = new HashMap<>();
-        map.put("customers", customerAccountList);
+        Map<String, JSONArray> map = new HashMap<>();
+        map.put("customers", CustomerAccountListToJsom(customerAccountList));
         JSONObject json = new JSONObject(map);
         saveToFile(json.toString(TAB));
     }
+
+    public JSONArray CustomerAccountListToJsom(ArrayList<CustomerAccount> customerList) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (CustomerAccount ca : customerList) {
+            jsonArray.put(ca.CustomerAccountToJson());
+        }
+
+        return jsonArray;
+    }
+
 
     // MODIFIES: this
     // EFFECTS: closes writer

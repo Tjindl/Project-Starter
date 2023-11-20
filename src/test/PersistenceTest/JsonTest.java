@@ -1,7 +1,6 @@
 package PersistenceTest;
 
-import model.CustomerAccount;
-import model.Item;
+import model.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

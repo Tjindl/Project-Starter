@@ -14,6 +14,7 @@ public class CustomerAccount {
     private int id;
     private int balance;
     private static int nextAccountId = 0;
+
     private ArrayList<Integer> paymentLog;
     private ArrayList<Item> allRentedList = new ArrayList<>();
     public final int totalInventory = 50;
@@ -21,6 +22,9 @@ public class CustomerAccount {
 
 
 
+    public void setPaymentLog(ArrayList<Integer> paymentLog) {
+        this.paymentLog = paymentLog;
+    }
     // MODIFIES : this
     // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
@@ -29,9 +33,11 @@ public class CustomerAccount {
         this.id = nextAccountId++;
         this.itemlist = new ArrayList<>();
         this.paymentLog = new ArrayList<>();
-        paymentLog.add(deposit);
+        this.paymentLog.add(deposit);
 
     }
+
+
 
     // REQUIRES : amount >=0
     // MODIFIES : this, payment log
@@ -65,7 +71,7 @@ public class CustomerAccount {
         return this.balance;
     }
 
-    public ArrayList getItemlist() {
+    public ArrayList<Item> getItemlist() {
         return this.itemlist;
     }
 
@@ -130,11 +136,11 @@ public class CustomerAccount {
 
 
     // EFFECTS : gives the list of items of the given item id
-    public List findItemFromThisAccount(int itemID) {
-        List<Integer> lst = new ArrayList<>();
+    public List<String> findItemFromThisAccount(int itemID) {
+        List<String> lst = new ArrayList<>();
         for (Item i2 : this.itemlist) {
             if (i2.getItemId() == itemID) {
-                lst.add(i2.getItemId());
+                lst.add(i2.getName() + "-" + i2.getPeriod() + "days");
             }
         }
         return lst;
@@ -160,26 +166,38 @@ public class CustomerAccount {
         return ans;
     }
 
-//    @Override
-//    public JSONObject toJson() {
-//        JSONObject json = new JSONObject();
-//        json.put("id", this.id);
-//        json.put("balance", this.balance);
-//        json.put("payment_log", this.paymentLog);
-//        json.put("items", itemsToJson());
-//        json.put("calculated rent", calculateRent());
-//        return json;
-//    }
 
-//    private JSONArray itemsToJson() {
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (Item i : itemlist) {
-//            jsonArray.put(i.toJson());
-//        }
-//
-//        return jsonArray;
-//    }
+
+
+    public JSONObject CustomerAccountToJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("name", this.name);
+        json.put("balance", this.balance);
+        json.put("payment_log", this.paymentLog);
+        json.put("itemlist", itemsToJson());
+        json.put("calculated rent", calculateRent());
+        return json;
+    }
+
+    private JSONArray plToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (int payment : this.paymentLog) {
+            jsonArray.put(payment);
+            System.out.println(jsonArray);
+        }
+        return jsonArray;
+    }
+
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : itemlist) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 
 
     public String getName() {

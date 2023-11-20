@@ -41,6 +41,8 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    private JSONArray jsonCustomerPaymentLog;
+
     // EFFECTS: parses Customer account list from JSON object and returns it
     private ArrayList<CustomerAccount> parseCustomerAccounts(JSONObject jsonObject) {
         ArrayList<CustomerAccount> customerAccounts = new ArrayList<CustomerAccount>();
@@ -50,18 +52,35 @@ public class JsonReader {
             JSONObject existingCustomerAccount = (JSONObject) json;
             String customerName = existingCustomerAccount.getString("name");
             Integer customerBalance = existingCustomerAccount.getInt("balance");
+            Integer customerID = existingCustomerAccount.getInt("id");
             JSONArray jsonCustomerItems = existingCustomerAccount.getJSONArray("itemlist");
+            jsonCustomerPaymentLog = existingCustomerAccount.getJSONArray("payment_log");
             customerItems = parseCustomerItems(jsonCustomerItems);
             CustomerAccount customerAccount = new CustomerAccount(customerName, customerBalance);
+            customerAccount.setId(customerID);
+            customerAccount.setPaymentLog(parsePaymentLog(jsonCustomerPaymentLog));
             customerAccount.setItemlist(customerItems);
             customerAccounts.add(customerAccount);
         }
         return customerAccounts;
     }
 
+    private ArrayList<Integer> parsePaymentLog(JSONArray jsonArray) {
+        ArrayList<Integer> paymentlist = new ArrayList<>();
+        //Integer[] payList = new Integer[jsonArray.length()];
+        for (int i=0; i<jsonCustomerPaymentLog.length();i++){
+            paymentlist.add((Integer)jsonArray.get(i));
+        }
+        return paymentlist;
+//        for (int i = 0; i < jsonCustomerPaymentLog.length(); i++) {
+//            paymentlist.add(jsonCustomerPaymentLog.get(i).toString());
+//            array[i] = (String)jsArray.get(i);
+//        }
+    }
+
     // EFFECTS: parses Customer item list from JSON object and returns it
     private ArrayList<Item> parseCustomerItems(JSONArray jsonArray) {
-        ArrayList<Item> customerItems = new ArrayList<Item>();
+        ArrayList<Item> customerItems = new ArrayList<>();
         for (Object json : jsonArray) {
             JSONObject existingCustomerItem = (JSONObject) json;
             String itemName = existingCustomerItem.getString("name");

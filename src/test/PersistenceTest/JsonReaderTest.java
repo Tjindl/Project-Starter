@@ -1,7 +1,7 @@
 package PersistenceTest;
 
-import model.CustomerAccount;
-import model.Item;
+import ca.ubc.cpsc210.rentalshop.model.model.CustomerAccount;
+import ca.ubc.cpsc210.rentalshop.model.model.Item;
 
 import org.junit.jupiter.api.Test;
 

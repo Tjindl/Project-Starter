@@ -14,10 +14,11 @@ import java.util.Arrays;
 
 // Represents the app/ console ui for the program
 public class CustomerApp {
+
     private ArrayList<CustomerAccount> existingCustomerAccounts = new ArrayList<>();
     CustomerAccount ca1;
     public final int totalInventory = 50;
-    private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>();
+    private ArrayList<CustomerAccount> customerAccounts = new ArrayList<>(); // List for current work
     private Scanner input;
     private static final String JSON_STORE = "./data/workroomSample.json";
     private JsonWriter jsonWriter;
@@ -34,39 +35,65 @@ public class CustomerApp {
         runCustomer();
     }
 
+    public CustomerApp(String withgui) {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+    }
+
+
+
+
+
+
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runCustomer() {
+    void runCustomer() {
         boolean keepGoing = true;
-        String command = null;
+        String runCustCommand = null;
         init();
         while (keepGoing) {
             displayMenu();
-            command = input.next().toLowerCase();
-            if (command.equals("q")) {
+            runCustCommand = input.next().toLowerCase();
+            if (runCustCommand.equals("q")) {
                 String command2 = null;
                 System.out.println("Do you want to save your work? \n y->yes and n->no and l->load");
                 command2 = input.next();
                 if (command2 == "n") {
                     keepGoing = false;
-                } else if (command2 == "l") {
-                    loadWorkRoom();
                 } else {
                     saveWorkRoom();
                     keepGoing = false;
                 }
             } else {
-                processCommand(command);
+                processCommand(runCustCommand);
+            }
+        }
+        System.out.println("\nGoodbye!");
+    }
+
+    void runCustomer(String quitstr) {
+        boolean keepGoing = true;
+        init();
+        while (keepGoing) {
+
+            String runCustCommand = "q";
+            if (runCustCommand.equals("q")) {
+                String command2 = null;
+                keepGoing = false;
+            } else {
+                processCommand(runCustCommand);
             }
         }
         System.out.println("\nGoodbye!");
     }
 
 
+
+
     // MODIFIES : saves the data to a json file.
-    private void saveWorkRoom() {
+    void saveWorkRoom() {
         try {
-            System.out.println(existingCustomerAccounts);
+
             existingCustomerAccounts.addAll(customerAccounts);
             jsonWriter.open();
             jsonWriter.write(existingCustomerAccounts);
@@ -79,9 +106,9 @@ public class CustomerApp {
 
 //     MODIFIES: this
 //     EFFECTS: loads data from file
-    private void loadWorkRoom() {
+    public void loadWorkRoom() {
         try {
-            existingCustomerAccounts = jsonReader.read();
+            this.existingCustomerAccounts = jsonReader.read();
             System.out.println("Loaded " + existingCustomerAccounts.toString() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
@@ -91,7 +118,7 @@ public class CustomerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user command
-    private void processCommand(String command) {
+    public void processCommand(String command) {
         if (command.equals("d")) {
             doDeposit();
         } else if (command.equals("cr")) {
@@ -120,10 +147,10 @@ public class CustomerApp {
 
     // MODIFIES: this
     // EFFECTS: conducts a deposit transaction
-    private void doDeposit() {
+    void doDeposit() {
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
-        for (CustomerAccount ca: customerAccounts) {
+        for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == amount) {
                 System.out.print("Enter amount to deposit: $");
                 int amt = input.nextInt();
@@ -135,6 +162,18 @@ public class CustomerApp {
                 System.out.println("Cannot find your account, please make one\n");
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: conducts a deposit transaction by taking input
+    void doDeposit(int id, int amount) {
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == id) {
+                ca.deposit(amount);
+                System.out.println(ca.getPaymentLog());
+            }
+        }
+        System.out.println("Cannot find your account, please make one\n");
     }
 
 
@@ -156,6 +195,16 @@ public class CustomerApp {
         System.out.println("Cannot find your account, please make one\n");
     }
 
+    public int doCalculate(int accID) {
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == accID) {
+                System.out.println(ca.calculateRent());
+                return ca.calculateRent();
+            }
+        }
+        return 0;
+    }
+
     // MODIFIES: this
     // EFFECTS: conducts a borrow transaction
     private void doBorrow() {
@@ -167,11 +216,13 @@ public class CustomerApp {
                 accountFound = true;
                 System.out.print("enter 1 for Ski or 2 for Snowboard?");
                 int i = input.nextInt();
+                System.out.print("enter period you want it for");
+                int per = input.nextInt();
                 if (i == 1) {
-                    ca.addItem(new Item("Ski", 1,0,15));
+                    ca.addItem(new Item("Ski", 1,per,15));
                     System.out.print("Ski successfully issued!");
                 } else if (i == 2) {
-                    ca.addItem(new Item("Snowboard", 2,0,20));
+                    ca.addItem(new Item("Snowboard", 2,per,20));
                     System.out.print("Snowboard successfully issued!");
                 } else {
                     System.out.println("Selection not valid...");
@@ -184,6 +235,26 @@ public class CustomerApp {
         }
     }
 
+    public void doBorrow(int accId, int itemid, int period) {
+        boolean accountFound = false;
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == accId) {
+                accountFound = true;
+                if (itemid == 1) {
+                    ca.addItem(new Item("Ski", 1,period,15));
+                } else if (itemid == 2) {
+                    ca.addItem(new Item("Snowboard", 2,period,20));
+                }
+                break;
+            }
+        }
+        if (!accountFound) {
+            System.out.println("Cannot find your account, please make one\n");
+        }
+    }
+
+
+
     // MODIFIES: this
     // EFFECTS: conducts a deposit transaction
     private void doReturn() {
@@ -195,6 +266,15 @@ public class CustomerApp {
                 int itemid = input.nextInt();
                 ca.returnItem(itemid);
                 System.out.println("returned!");
+            } else {
+                System.out.println("Cannot find your account, please make one\n");
+            }
+        }
+    }
+    public void doReturn(int accId , int itemId) {
+        for (CustomerAccount ca: customerAccounts) {
+            if (ca.getId() == accId) {
+                ca.returnItem(itemId);
             } else {
                 System.out.println("Cannot find your account, please make one\n");
             }
@@ -252,6 +332,22 @@ public class CustomerApp {
         }
     }
 
+    public List<String> doListItem(int customerAcct, int itemid) {
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == customerAcct) {
+                if (itemid == 1) {
+                    return (ca.findItemFromThisAccount(1));
+                } else if (itemid == 2) {
+                    return ca.findItemFromThisAccount(2);
+                } else {
+                    System.out.println("Selection not valid...");
+                }
+            }
+            System.out.println("Cannot find your account, please make one\n");
+        }
+        return null;
+    }
+
 
     // EFFECTS: gives the remaining lending time of the given item
     private void doRemainingTime() {
@@ -290,6 +386,12 @@ public class CustomerApp {
         System.out.println(Integer.toString(nct.getId()));
     }
 
+    public int doAddCustomer(String name, int deposit) {
+        CustomerAccount nct = new CustomerAccount(name,deposit);
+        this.customerAccounts.add(nct);
+        return (nct.getId());
+    }
+
 
     // EFFECTS: gives the payment log for a given customer
     private void doPaymentLog() {
@@ -304,6 +406,17 @@ public class CustomerApp {
         }
         System.out.println("Cannot find your account, please make one\n");
     }
+    public ArrayList<Integer> doPaymentLog(int customerAcc) {
+        for (CustomerAccount ca: existingCustomerAccounts) {
+            if (ca.getId() == customerAcc) {
+                System.out.println(ca.getPaymentLog());
+
+                return ca.getPaymentLog();
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -336,4 +449,9 @@ public class CustomerApp {
         System.out.println("\tpl -> payment log");
         System.out.println("\tq -> quit");
     }
+
+    public ArrayList<CustomerAccount> getExistingCustomerAccounts() {
+        return existingCustomerAccounts;
+    }
+
 }

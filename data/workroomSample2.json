@@ -2,32 +2,44 @@
   {
     "balance": 1000,
     "name": "Tulsi",
+    "id": 0,
     "itemlist": [{
       "itemId": 1,
       "period": 2,
       "name": "Ski",
       "rent": 15
     }],
-    "id": 0,
-    "paymentLog": [1000]
+    "calculated rent": 30,
+    "payment_log": [
+
+      1000,
+      2000,
+      2000
+    ]
   },
   {
-    "balance": 2000,
+    "balance": 3234,
     "name": "Tushar",
+    "id": 1,
     "itemlist": [{
       "itemId": 1,
       "period": 2,
       "name": "Ski",
       "rent": 15
     }],
-    "id": 1,
-    "paymentLog": [2000]
+    "calculated rent": 30,
+    "payment_log": [
+      3232,
+      1,
+      1
+    ]
   },
   {
     "balance": 200,
     "name": "vsbj",
-    "itemlist": [],
     "id": 2,
-    "paymentLog": [200]
+    "itemlist": [],
+    "calculated rent": 0,
+    "payment_log": [200]
   }
 ]}

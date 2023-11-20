@@ -1,8 +1,8 @@
 package PersistenceTest;
 
-import model.CustomerAccount;
-import model.Item;
 
+
+import model.*;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;

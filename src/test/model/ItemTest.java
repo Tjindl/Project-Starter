@@ -1,8 +1,7 @@
 package model;
+import ca.ubc.cpsc210.rentalshop.model.model.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

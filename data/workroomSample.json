@@ -2,56 +2,96 @@
     {
         "balance": 1000,
         "name": "Tulsi",
+        "id": 0,
         "itemlist": [{
             "itemId": 1,
             "period": 2,
             "name": "Ski",
             "rent": 15
         }],
-        "id": 0,
-        "paymentLog": [1000]
+        "calculated rent": 30,
+        "payment_log": [
+            1000,
+            2000,
+            2000
+        ]
     },
     {
-        "balance": 2000,
+        "balance": 3334,
         "name": "Tushar",
-        "itemlist": [{
-            "itemId": 1,
-            "period": 2,
-            "name": "Ski",
-            "rent": 15
-        }],
         "id": 1,
-        "paymentLog": [2000]
+        "itemlist": [
+            {
+                "itemId": 1,
+                "period": 2,
+                "name": "Ski",
+                "rent": 15
+            },
+            {
+                "itemId": 2,
+                "period": 5,
+                "name": "Snowboard",
+                "rent": 20
+            },
+            {
+                "itemId": 1,
+                "period": 10,
+                "name": "Ski",
+                "rent": 15
+            },
+            {
+                "itemId": 2,
+                "period": 10,
+                "name": "Snowboard",
+                "rent": 20
+            },
+            {
+                "itemId": 1,
+                "period": 10,
+                "name": "Ski",
+                "rent": 15
+            },
+            {
+                "itemId": 1,
+                "period": 20,
+                "name": "Ski",
+                "rent": 15
+            },
+            {
+                "itemId": 2,
+                "period": 34,
+                "name": "Snowboard",
+                "rent": 20
+            },
+            {
+                "itemId": 2,
+                "period": 45,
+                "name": "Snowboard",
+                "rent": 20
+            }
+        ],
+        "calculated rent": 2510,
+        "payment_log": [
+            3232,
+            1,
+            1,
+            100
+        ]
     },
     {
         "balance": 200,
         "name": "vsbj",
-        "itemlist": [{
-            "itemId": 1,
-            "period": 0,
-            "name": "Ski",
-            "rent": 15
-        }],
         "id": 2,
-        "paymentLog": [200]
+        "itemlist": [],
+        "calculated rent": 0,
+        "payment_log": [200]
     },
     {
         "balance": 2000,
-        "name": "vjfns",
-        "itemlist": [{
-            "itemId": 1,
-            "period": 0,
-            "name": "Ski",
-            "rent": 15
-        }],
-        "id": 3,
-        "paymentLog": [2000]
-    },
-    {
-        "balance": 200,
-        "name": "jnasvn",
+        "name": "Sample Customer",
+        "id": 6,
         "itemlist": [],
-        "id": 4,
-        "paymentLog": [200]
+        "calculated rent": 0,
+        "payment_log": [2000]
     }
 ]}
