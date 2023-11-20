@@ -42,7 +42,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
 //            ca = reader.read();
-            assertEquals("My account", ca.get(0).getName());
+            assertEquals("My account", ca.get(0).getname());
             assertEquals(0, ca.get(0).getItemlist().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -64,7 +64,7 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
 //            customerAccounts = reader.read();
-            assertEquals("My Account", customerAccount.getName());
+            assertEquals("My Account", customerAccount.getname());
             customerAccount.addItem(new Item("Ski", 1, 5, 15));
             List<Item> items = customerAccount.getItemlist();
             assertEquals(3, items.size());

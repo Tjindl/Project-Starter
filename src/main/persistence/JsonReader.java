@@ -57,7 +57,7 @@ public class JsonReader {
             jsonCustomerPaymentLog = existingCustomerAccount.getJSONArray("payment_log");
             customerItems = parseCustomerItems(jsonCustomerItems);
             CustomerAccount customerAccount = new CustomerAccount(customerName, customerBalance);
-            customerAccount.setId(customerID);
+            customerAccount.setid(customerID);
             customerAccount.setPaymentLog(parsePaymentLog(jsonCustomerPaymentLog));
             customerAccount.setItemlist(customerItems);
             customerAccounts.add(customerAccount);

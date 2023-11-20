@@ -29,7 +29,7 @@ class CustomerAccountTest {
         assertEquals(500, tstPaymentLog.get(0));
         ArrayList<Item> tstItemList = testCustomerAccount.getItemlist();
         assertEquals(0, tstItemList.size());
-        testCustomerAccount.setId(5);
+        testCustomerAccount.setid(5);
         assertEquals(5, testCustomerAccount.getId());
     }
 
@@ -67,7 +67,7 @@ class CustomerAccountTest {
         testCustomerAccount.addItem(testItem1);
         ArrayList<Item> testList1 = testCustomerAccount.getItemlist();
         assertEquals(1, testList1.size());
-        assertEquals("Ski", testList1.get(0).getName());
+        assertEquals("Ski", testList1.get(0).getname());
         testCustomerAccount.addItem(testItem2);
         ArrayList<Item> testList2 = testCustomerAccount.getItemlist();
         assertEquals(2, testList1.size());
@@ -80,7 +80,7 @@ class CustomerAccountTest {
         testCustomerAccount.removeItem(testItem1);
         ArrayList<Item> testList1 = testCustomerAccount.getItemlist();
         assertEquals(1, testList1.size());
-        assertEquals("Snowboard", testList1.get(0).getName());
+        assertEquals("Snowboard", testList1.get(0).getname());
         testCustomerAccount.removeItem(testItem1);
         assertEquals(1, testList1.size());
     }

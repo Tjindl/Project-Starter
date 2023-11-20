@@ -103,7 +103,7 @@ public class CustomerAccount {
         for (Item i : this.itemlist) {
             if (i.getItemId() == itemid) {
                 this.itemlist.remove(i);
-                this.balance = this.balance - i.getRent();
+                this.balance = this.balance - i.getrent();
             }
             break;
         }
@@ -140,7 +140,7 @@ public class CustomerAccount {
         List<String> lst = new ArrayList<>();
         for (Item i2 : this.itemlist) {
             if (i2.getItemId() == itemID) {
-                lst.add(i2.getName() + "-" + i2.getPeriod() + "days");
+                lst.add(i2.getname() + "-" + i2.getperiod() + "days");
             }
         }
         return lst;
@@ -159,7 +159,7 @@ public class CustomerAccount {
         int ans = 0;
         for (Item i : this.itemlist) {
             if (itemid == i.getItemId()) {
-                ans = (maxDuration - i.getPeriod());
+                ans = (maxDuration - i.getperiod());
             }
             break;
         }
@@ -180,14 +180,7 @@ public class CustomerAccount {
         return json;
     }
 
-    private JSONArray plToJson() {
-        JSONArray jsonArray = new JSONArray();
-        for (int payment : this.paymentLog) {
-            jsonArray.put(payment);
-            System.out.println(jsonArray);
-        }
-        return jsonArray;
-    }
+
 
     private JSONArray itemsToJson() {
         JSONArray jsonArray = new JSONArray();
@@ -200,11 +193,11 @@ public class CustomerAccount {
     }
 
 
-    public String getName() {
+    public String getname() {
         return this.name;
     }
 
-    public void setId(int i) {
+    public void setid(int i) {
         this.id = i;
     }
 }

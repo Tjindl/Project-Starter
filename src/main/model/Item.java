@@ -2,10 +2,15 @@ package model;
 
 import org.json.JSONObject;
 
-import java.util.Date;
-
 // Represents the items and their properties
 public class Item {
+    private int period;
+    private int rent;
+    private int itemId;
+    private static int nextItemId = 1;
+    private String name;
+
+
     public void setPeriod(int period) {
         this.period = period;
     }
@@ -22,14 +27,10 @@ public class Item {
         this.name = name;
     }
 
-    private int period;
-    private int rent;
-    private int itemId;
-    private static int nextItemId = 1;
-    private String name;
 
-
-
+    public int getItemId() {
+        return itemId;
+    }
 
     // MODIFIES : this
     // EFFECTS : Constructs an item
@@ -40,11 +41,8 @@ public class Item {
         this.name = name;
     }
 
-    public int getItemId() {
-        return this.itemId;
-    }
 
-    public int getRent() {
+    public int getrent() {
         return this.rent;
     }
 
@@ -53,11 +51,11 @@ public class Item {
         return ((this.period) * (this.rent));
     }
 
-    public String getName() {
+    public String getname() {
         return this.name;
     }
 
-    public int getPeriod() {
+    public int getperiod() {
         return this.period;
     }
 

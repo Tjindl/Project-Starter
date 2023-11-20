@@ -60,9 +60,9 @@ public class ItemTableModel extends AbstractTableModel {
 
         switch (column) {
             case 0: return item.getItemId();
-            case 1: return item.getPeriod();
-            case 2: return item.getRent();
-            case 3: return item.getName();
+            case 1: return item.getperiod();
+            case 2: return item.getrent();
+            case 3: return item.getname();
             default: return null;
         }
     }
@@ -114,7 +114,7 @@ public class ItemTableModel extends AbstractTableModel {
 //            System.out.println(itemType);
 //            System.out.println(item.getName());
 //            System.out.println(itemType.equals(item.getName()));
-            if (itemType.equals(item.getName())) {
+            if (itemType.equals(item.getname())) {
 //                System.out.println(itemType + "in if statement");
                 //removeItem(count);
 //                indexList.add(count);
