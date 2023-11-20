@@ -26,11 +26,24 @@ public class ItemTest {
         assertEquals(2, testItem2.getItemId());
         assertEquals(3, testItem2.getperiod());
         assertEquals(20, testItem2.getrent());
+
     }
 
     @Test
     void testRentCalculatorPerItem() {
         assertEquals(105, testItem1.rentCalculatorPerItem());
         assertEquals(60, testItem2.rentCalculatorPerItem());
+    }
+
+    @Test
+    void testSetters() {
+        testItem1.setItemId(5);
+        testItem1.setPeriod(1);
+        testItem1.setRent(13);
+        testItem1.setName("abc");
+        assertEquals(5,testItem1.getItemId());
+        assertEquals(1, testItem1.getperiod());
+        assertEquals(13, testItem1.getrent());
+        assertEquals("abc", testItem1.getname());
     }
 }
