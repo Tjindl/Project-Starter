@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents the model that builds the table
 public class ItemTableModel extends AbstractTableModel {
     private String[] columnNames = {
             "ItemId", "Period", "Item Rent Per Unit", "Item Name"};
@@ -23,16 +24,20 @@ public class ItemTableModel extends AbstractTableModel {
         this.originalItems = items;
     }
 
+    // EFFECTS : gives the number of columns
     @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
+    // EFFECTS : gives out the column name from column number
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
     }
 
+
+    // EFFECTS : gives the number of items in the table
     @Override
     public int getRowCount() {
         return items.size();
@@ -46,6 +51,7 @@ public class ItemTableModel extends AbstractTableModel {
         }
     }
 
+    // EFFECT : tells whether the cell is editable.
     @Override
     public boolean isCellEditable(int row, int column) {
         switch (column) {
@@ -54,6 +60,7 @@ public class ItemTableModel extends AbstractTableModel {
         }
     }
 
+    // EFFECTS : gives out a value at a cell
     @Override
     public Object getValueAt(int row, int column) {
         Item item = getItem(row);
@@ -67,6 +74,8 @@ public class ItemTableModel extends AbstractTableModel {
         }
     }
 
+    // MODIFIES : table
+    // EFFECTS : sets the value in a cell
     @Override
     public void setValueAt(Object value, int row, int column) {
         Item item = getItem(row);
@@ -93,38 +102,30 @@ public class ItemTableModel extends AbstractTableModel {
         insertItem(getRowCount(), item);
     }
 
+    // MODIFIES : items
+    // EFFECTS : inserts an item at an index
     public void insertItem(int row, Item item) {
         items.add(row, item);
         fireTableRowsInserted(row, row);
     }
 
+    // MODIFIES : items
+    // EFFECTS : removes an item at an index
     public void removeItem(int row) {
         items.remove(row);
         fireTableRowsDeleted(row, row);
     }
 
+    // MODIFIES : Table
+    // EFFECTS : filters the items in the table
     public void filterItems(String itemType) {
         System.out.println(itemType + "inside filter method");
         this.items = originalItems;
         filteredItems = new ArrayList<>();
-//        int count = 0;
-//        ArrayList<Integer> indexList = new ArrayList<>();
         for (Item item : items) {
-//            System.out.println(item.getPeriod() + "inside for loop");
-//            System.out.println(itemType);
-//            System.out.println(item.getName());
-//            System.out.println(itemType.equals(item.getName()));
             if (itemType.equals(item.getname())) {
-//                System.out.println(itemType + "in if statement");
-                //removeItem(count);
-//                indexList.add(count);
-//                System.out.println(itemType + "deleted");
                 filteredItems.add(item);
             }
-//            count++;
-//            for (int i : indexList) {
-//
-//            }
             this.items = filteredItems;
         }
 

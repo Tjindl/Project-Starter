@@ -21,6 +21,7 @@ public class CustomerAccount {
 
 
 
+    // setter for payment log
     public void setPaymentLog(ArrayList<Integer> paymentLog) {
         this.paymentLog = paymentLog;
     }
@@ -62,10 +63,6 @@ public class CustomerAccount {
     public int getId() {
         return this.id;
     }
-
-//    public int setId(int i) {
-//        return this.id = i;
-//    }
 
     public int getBalance() {
         return this.balance;
@@ -169,6 +166,7 @@ public class CustomerAccount {
 
 
 
+    // EFFECTS : writes customer account to json
     public JSONObject customerAccountToJson() {
         JSONObject json = new JSONObject();
         json.put("id", this.id);
@@ -182,6 +180,7 @@ public class CustomerAccount {
 
 
 
+    // EFFECTS : traverses the item list of a customer to write it into json
     private JSONArray itemsToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -197,7 +196,7 @@ public class CustomerAccount {
         return this.name;
     }
 
-    public void setid(int i) {
+    public void setid(int i)     {
         this.id = i;
     }
 }

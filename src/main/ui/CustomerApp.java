@@ -35,6 +35,7 @@ public class CustomerApp {
         runCustomer();
     }
 
+    // EFFECTS : runs the CustomerApp application with gui
     public CustomerApp(String withgui) {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -71,6 +72,8 @@ public class CustomerApp {
         System.out.println("\nGoodbye!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input for gui app
     void runCustomer(String quitstr) {
         boolean keepGoing = true;
         init();
@@ -195,6 +198,8 @@ public class CustomerApp {
         System.out.println("Cannot find your account, please make one\n");
     }
 
+    // REQUIRES : accID is in list
+    // EFFECTS : gives out the calculated rent
     public int doCalculate(int accID) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == accID) {
@@ -236,6 +241,9 @@ public class CustomerApp {
         }
     }
 
+    // REQUIRES : a valid itemid and a valid accId
+    // MODIFIES : a customer in existingCustomerAccounts
+    // EFFECTS : adds the item related to given itemid and period to the customer related to accId
     public void doBorrow(int accId, int itemid, int period) {
         boolean accountFound = false;
         for (CustomerAccount ca: existingCustomerAccounts) {
@@ -273,8 +281,14 @@ public class CustomerApp {
         }
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: conducts a return transaction for a specific account
     public void doReturn(int accId, int itemId) {
-        for (CustomerAccount ca: customerAccounts) {
+        ArrayList<CustomerAccount> traversalList = new ArrayList<>();
+        traversalList.addAll(existingCustomerAccounts);
+        traversalList.addAll(customerAccounts);
+        for (CustomerAccount ca: traversalList) {
             if (ca.getId() == accId) {
                 ca.returnItem(itemId);
             } else {
@@ -334,6 +348,8 @@ public class CustomerApp {
         }
     }
 
+    // REQUIRES : customerAcct and itemid exists
+    // EFFECTS : returns the list of items of type itemid which customerAcc has borrowed
     public List<String> doListItem(int customerAcct, int itemid) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == customerAcct) {
@@ -388,6 +404,8 @@ public class CustomerApp {
         System.out.println(Integer.toString(nct.getId()));
     }
 
+    // MODIFIES : customerAccounts
+    // EFFECTS : makes new customer with given name and deposit and gives out the generated customer id
     public int doAddCustomer(String name, int deposit) {
         CustomerAccount nct = new CustomerAccount(name,deposit);
         this.customerAccounts.add(nct);
@@ -409,6 +427,8 @@ public class CustomerApp {
         System.out.println("Cannot find your account, please make one\n");
     }
 
+    // REQUIRES : customerAcc exists
+    // EFFECTS : gives out the payment log of the related customer
     public ArrayList<Integer> doPaymentLog(int customerAcc) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == customerAcc) {
@@ -426,14 +446,7 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: initializes accounts
     private void init() {
-//        ca1 = new CustomerAccount("Tushar", 500);
-//        ca1.setId(2);
-//        ca1.addItem(new Item("Ski", 1, 2, 15));
-
         loadWorkRoom();
-//        input = new Scanner(System.in);
-//        input.useDelimiter("\n");
-//        customerAccounts.add(ca1);
     }
 
 

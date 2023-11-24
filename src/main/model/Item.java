@@ -60,7 +60,8 @@ public class Item {
     }
 
 
-    // Function to convert item to json object
+
+    // EFFECTS : Function to convert item to json object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("itemId", this.itemId);
