@@ -119,7 +119,6 @@ public class ItemTableModel extends AbstractTableModel {
     // MODIFIES : Table
     // EFFECTS : filters the items in the table
     public void filterItems(String itemType) {
-        System.out.println(itemType + "inside filter method");
         this.items = originalItems;
         filteredItems = new ArrayList<>();
         for (Item item : items) {

@@ -29,7 +29,6 @@ public class CustomerAccount {
     // MODIFIES : this
     // EFFECTS : constructs a new customer account
     public CustomerAccount(String name, int deposit) {
-        EventLog.getInstance().logEvent(new Event("Customer added"));
         this.name = name;
         this.balance = deposit;
         this.id = nextAccountId++;

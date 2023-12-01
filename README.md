@@ -23,7 +23,29 @@ An example of text with **bold** and *italic* fonts.
 Referred to alarm system project and some online swing documentation
 
 # Instructions for the grader: 
+- Start the commands after loading Application.
 - Load, Save and quit can be done by shortcuts or by clicking save.load or quit in the top menu.
 - Item can be added to the Customer Account using Borrow Item button, you need to enter further details of the item to add the item.
 - The visual component os the project is the splash screen.
 - The show item List button can be used to get the list of Items(X's) added to customer Account(Y)
+- SHOWS THE LOG WHEN YOU QUIT FROM THE QUIT BUTTON FROM THE TOP MENU.
+
+
+
+// Phase 4: Task 3
+- Using maps instead of ArrayList, it will make the customer traversal quick and easy.
+- Using Basic Iterator design pattern.
+- I should have made orders as elements/classes and then work on them, it looks more practical.
+
+
+
+// Phase 4: Task 2
+///
+Fri Dec 01 14:43:01 PST 2023
+Searched Item by ItemId from this Account
+
+
+Fri Dec 01 14:43:11 PST 2023
+Item added to this Account.
+
+///
