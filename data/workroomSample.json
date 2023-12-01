@@ -17,7 +17,7 @@
         ]
     },
     {
-        "balance": 3334,
+        "balance": 3344,
         "name": "Tushar",
         "id": 1,
         "itemlist": [
@@ -68,14 +68,27 @@
                 "period": 45,
                 "name": "Snowboard",
                 "rent": 20
+            },
+            {
+                "itemId": 2,
+                "period": 10,
+                "name": "Snowboard",
+                "rent": 20
+            },
+            {
+                "itemId": 2,
+                "period": 30,
+                "name": "Snowboard",
+                "rent": 20
             }
         ],
-        "calculated rent": 2510,
+        "calculated rent": 3310,
         "payment_log": [
             3232,
             1,
             1,
-            100
+            100,
+            10
         ]
     },
     {
@@ -93,5 +106,13 @@
         "itemlist": [],
         "calculated rent": 0,
         "payment_log": [2000]
+    },
+    {
+        "balance": 200,
+        "name": "Aden",
+        "id": 8,
+        "itemlist": [],
+        "calculated rent": 0,
+        "payment_log": [200]
     }
 ]}

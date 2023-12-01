@@ -21,3 +21,9 @@ An example of text with **bold** and *italic* fonts.
 
 
 Referred to alarm system project and some online swing documentation
+
+# Instructions for the grader: 
+- Load, Save and quit can be done by shortcuts or by clicking save.load or quit in the top menu.
+- Item can be added to the Customer Account using Borrow Item button, you need to enter further details of the item to add the item.
+- The visual component os the project is the splash screen.
+- The show item List button can be used to get the list of Items(X's) added to customer Account(Y)

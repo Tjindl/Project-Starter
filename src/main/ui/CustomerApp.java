@@ -112,7 +112,7 @@ public class CustomerApp {
     public void loadWorkRoom() {
         try {
             this.existingCustomerAccounts = jsonReader.read();
-            System.out.println("Loaded " + existingCustomerAccounts.toString() + " from " + JSON_STORE);
+//            System.out.println("Loaded " + existingCustomerAccounts.toString() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
@@ -173,10 +173,10 @@ public class CustomerApp {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == id) {
                 ca.deposit(amount);
-                System.out.println(ca.getPaymentLog());
+//                System.out.println(ca.getPaymentLog());
             }
         }
-        System.out.println("Cannot find your account, please make one\n");
+//        System.out.println("Cannot find your account, please make one\n");
     }
 
 
@@ -203,7 +203,6 @@ public class CustomerApp {
     public int doCalculate(int accID) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == accID) {
-                System.out.println(ca.calculateRent());
                 return ca.calculateRent();
             }
         }
@@ -267,17 +266,21 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: conducts a deposit transaction
     private void doReturn() {
+        boolean accountFound = false;
         System.out.print("Enter account id : ");
         int amount = input.nextInt();
         for (CustomerAccount ca: customerAccounts) {
             if (ca.getId() == amount) {
+                accountFound = true;
                 System.out.print("Enter item id : ");
                 int itemid = input.nextInt();
                 ca.returnItem(itemid);
                 System.out.println("returned!");
-            } else {
-                System.out.println("Cannot find your account, please make one\n");
+                break;
             }
+        }
+        if (!accountFound) {
+            System.out.println("Cannot find your account, please make one\n");
         }
     }
 
@@ -285,15 +288,18 @@ public class CustomerApp {
     // MODIFIES: this
     // EFFECTS: conducts a return transaction for a specific account
     public void doReturn(int accId, int itemId) {
+        boolean accountFound = false;
         ArrayList<CustomerAccount> traversalList = new ArrayList<>();
         traversalList.addAll(existingCustomerAccounts);
         traversalList.addAll(customerAccounts);
         for (CustomerAccount ca: traversalList) {
             if (ca.getId() == accId) {
+                accountFound = true;
                 ca.returnItem(itemId);
-            } else {
-                System.out.println("Cannot find your account, please make one\n");
             }
+        }
+        if (!accountFound) {
+            System.out.println("Cannot find your account, please make one\n");
         }
     }
 
@@ -351,8 +357,10 @@ public class CustomerApp {
     // REQUIRES : customerAcct and itemid exists
     // EFFECTS : returns the list of items of type itemid which customerAcc has borrowed
     public List<String> doListItem(int customerAcct, int itemid) {
+        boolean accountFound = false;
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == customerAcct) {
+                accountFound = true;
                 if (itemid == 1) {
                     return (ca.findItemFromThisAccount(1));
                 } else if (itemid == 2) {
@@ -361,6 +369,8 @@ public class CustomerApp {
                     System.out.println("Selection not valid...");
                 }
             }
+        }
+        if (!accountFound) {
             System.out.println("Cannot find your account, please make one\n");
         }
         return null;
@@ -432,8 +442,6 @@ public class CustomerApp {
     public ArrayList<Integer> doPaymentLog(int customerAcc) {
         for (CustomerAccount ca: existingCustomerAccounts) {
             if (ca.getId() == customerAcc) {
-                System.out.println(ca.getPaymentLog());
-
                 return ca.getPaymentLog();
             }
         }
